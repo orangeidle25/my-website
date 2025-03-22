@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Your Profile</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Click to Enter Prompt -->
+    <div id="enter-prompt" class="prompt">
+        <button id="enter-button">Click to Enter</button>
+    </div>
+
+    <!-- Main Content -->
+    <div id="profile-container" class="hidden">
+        <div class="profile-header">
+            <h1>Your Name</h1>
+            <p>Welcome to my profile!</p>
+        </div>
+
+        <div class="profile-info">
+            <img src="profile-pic.jpg" alt="Profile Picture" class="profile-pic">
+            <div class="socials">
+                <a href="https://github.com/yourgithub" target="_blank">GitHub</a>
+                <a href="https://twitter.com/yourtwitter" target="_blank">Twitter</a>
+                <a href="https://discord.com/users/yourdiscord" target="_blank">Discord</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 Your Name | Designed with 💙</p>
+        </div>
+    </div>
+
+    <!-- Background Video -->
+    <video autoplay loop muted id="background-video">
+        <source src="your-background-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Background Music -->
+    <audio id="background-music" autoplay loop>
+        <source src="background-music.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
