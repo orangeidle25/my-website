@@ -1,11 +1,9 @@
-/* Reset some default styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Fullscreen background video */
 #background-video {
     position: absolute;
     top: 0;
@@ -16,14 +14,13 @@
     z-index: -1;
 }
 
-/* Body and page layout */
 body {
-    font-family: Arial, sans-serif;
-    color: white;
+    font-family: "Nunito Sans", sans-serif;
+    color: rgb(255, 255, 255);
     text-align: center;
+    font: bold;
 }
 
-/* Prompt screen */
 .prompt {
     position: absolute;
     top: 50%;
@@ -33,10 +30,11 @@ body {
 }
 
 #enter-button {
-    padding: 10px 20px;
-    font-size: 1.2em;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: white;
+    padding: 1000px 2000px;
+    font-size: 1em;
+    font-family: "Nunito Sans", sans-serif;
+    background-color: rgb(26, 26, 26);
+    color: rgb(255, 255, 255);
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -44,10 +42,9 @@ body {
 }
 
 #enter-button:hover {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgb(58, 58, 58);
 }
 
-/* Profile container */
 #profile-container {
     display: flex;
     flex-direction: column;
@@ -56,36 +53,33 @@ body {
     padding: 20px;
 }
 
-/* Profile image */
 .profile-pic {
     border-radius: 50%;
     width: 150px;
     height: 150px;
     object-fit: cover;
-    border: 5px solid #fff;
+    border: 5px solid hsl(0, 0%, 100%);
     margin-bottom: 20px;
 }
 
-/* Socials links */
 .socials a {
     margin: 10px;
-    color: white;
+    color: rgb(255, 255, 255);
     text-decoration: none;
     font-size: 1.2em;
     transition: color 0.3s;
+    font: bold;
 }
 
 .socials a:hover {
     color: #58a6ff;
 }
 
-/* Footer section */
 .footer {
     margin-top: 20px;
     font-size: 1em;
 }
 
-/* Hidden until "Enter" clicked */
 .hidden {
     display: none;
 }

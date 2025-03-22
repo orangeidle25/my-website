@@ -4,48 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Your Profile</title>
+    <title>orangeidle25</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="profile.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Click to Enter Prompt -->
     <div id="enter-prompt" class="prompt">
-        <button id="enter-button">Click to Enter</button>
+        <button id="enter-button">click to enter...</button>
     </div>
 
-    <!-- Main Content -->
     <div id="profile-container" class="hidden">
         <div class="profile-header">
-            <h1>Your Name</h1>
-            <p>Welcome to my profile!</p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h1>orangeidle25</h1>
+            <h3>Developer, Proudly Canadian</h3>
+            <br>
         </div>
 
         <div class="profile-info">
-            <img src="profile-pic.jpg" alt="Profile Picture" class="profile-pic">
+            <img src="profile.jpg" alt="Profile Picture" class="profile-pic">
             <div class="socials">
-                <a href="https://github.com/yourgithub" target="_blank">GitHub</a>
-                <a href="https://twitter.com/yourtwitter" target="_blank">Twitter</a>
-                <a href="https://discord.com/users/yourdiscord" target="_blank">Discord</a>
+                <a onclick="github()" target="_blank">GitHub</a>
+                <a onclick="twitter()" target="_blank">Twitter</a>
+                <a onclick="discord()" target="_blank">Discord</a>
             </div>
         </div>
 
         <div class="footer">
-            <p>&copy; 2025 Your Name | Designed with 💙</p>
+            <p>&copy;2025 orangeidle25</p>
         </div>
     </div>
-
-    <!-- Background Video -->
     <video autoplay loop muted id="background-video">
-        <source src="your-background-video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video element. Please use Chrome, Firefox, Edge or Safari.
     </video>
-
-    <!-- Background Music -->
-    <audio id="background-music" autoplay loop>
-        <source src="background-music.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
+    <audio autoplay id="background-music" autoplay loop>
+        <source src="music.mp3" type="audio/mp3">
+        Your browser does not support the audio element. Please use Chrome, Firefox, Edge or Safari.
     </audio>
-
     <script src="script.js"></script>
 </body>
 </html>
