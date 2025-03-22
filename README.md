@@ -4,4 +4,4 @@ Last updated: March22 at 1:40pm
 
 Credits: Video: VJYE Edits. Song: Nouveau Opps by Maes and JRK 19.
 
-Developement: OrangleIdle25
+Website design and developement: OrangleIdle25
