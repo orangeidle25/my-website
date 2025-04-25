@@ -18,6 +18,6 @@ document.getElementById('enter-button').addEventListener('click', function() {
 
   function twitter() {
     if (confirm("You will be redirected to x.com. Do you want to continue?")) {
-      window.location.href = "https://x.com/orangeidle25";
+      window.location.href = "https://x.com/orangeidle";
     }
   }
