@@ -12,7 +12,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            padding-top: 100px;
+            padding-top: 120px; /* Increased from 100px to add more space */
             padding-left: 16%;
             padding-right: 16%;
             box-sizing: border-box;
@@ -22,12 +22,66 @@
             min-height: calc(100vh - 100px);
         }
         
-        .form-radio, .form-checkbox {
-            @apply w-5 h-5 bg-gray-700 border-gray-600 text-blue-500 focus:ring-blue-600;
+        .form-radio {
+            width: 1.25rem;
+            height: 1.25rem;
+            background-color: rgb(55 65 81);
+            border: 1px solid rgb(75 85 99);
+            color: rgb(59 130 246);
+            border-radius: 9999px;
+            vertical-align: middle;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        .form-radio:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+            background-color: rgb(59 130 246);
+            border-color: rgb(59 130 246);
+        }
+        
+        .form-checkbox {
+            width: 1.25rem;
+            height: 1.25rem;
+            background-color: rgb(55 65 81);
+            border: 1px solid rgb(75 85 99);
+            color: rgb(59 130 246);
+            border-radius: 0.25rem;
+            vertical-align: middle;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        .form-checkbox:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+            background-color: rgb(59 130 246);
+            border-color: rgb(59 130 246);
+        }
+
+        .form-radio:focus, .form-checkbox:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            border-color: rgb(59 130 246);
+            box-shadow: 0 0 0 2px rgb(59 130 246 / 0.5);
         }
         
         .form-input {
-            @apply w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500;
+            width: 100%;
+            padding: 0.75rem; /* p-3 */
+            background-color: rgb(55 65 81); /* bg-gray-700 */
+            border: 1px solid rgb(75 85 99); /* border-gray-600 */
+            border-radius: 0.5rem; /* rounded-lg */
+            color: white;
+            transition: all 0.2s ease-in-out;
+        }
+        .form-input::placeholder {
+            color: rgb(156 163 175); /* placeholder-gray-400 */
+        }
+        .form-input:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            border-color: rgb(59 130 246);
+            box-shadow: 0 0 0 2px rgb(59 130 246 / 0.5); /* focus:ring-2 focus:ring-blue-500 */
         }
 
         @keyframes title-gradient {
@@ -63,11 +117,7 @@
       <input autocomplete="off" type="checkbox" id="aadsstickymhnllgsu" hidden />
       <div style="padding-top: auto; padding-bottom: 0;">
         <div style="width:100%;height:auto;position:fixed;text-align:center;font-size:0;top:0;left:0;right:0;margin:auto">
-          <label for="aadsstickymhnllgsu" style="top: 50%;transform: translateY(-50%);right:24px;; position: absolute;border-radius: 4px; background: rgba(248, 248, 249, 0.70); padding: 4px;z-index: 99999;cursor:pointer">
-            <svg fill="#000000" height="16px" width="16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
-              <polygon points="456.851,0 245,212.564 33.149,0 0.708,32.337 212.669,245.004 0.708,457.678 33.149,490 245,277.443 456.851,490 489.292,457.678 277.331,245.004 489.292,32.337 "/>
-            </svg>
-          </label>
+          <!-- Removed close button label -->
           <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;"><iframe data-aa=2416404 src=//acceptable.a-ads.com/2416404/?size=Adaptive style='border:0; padding:0; width:70%; height:auto; overflow:hidden; margin: auto'></iframe></div>
         </div>
         <style>
@@ -81,11 +131,7 @@
       <input autocomplete="off" type="checkbox" id="aadsstickymhnlmkfw" hidden />
       <div style="padding-top: 0; padding-bottom: 0;">
         <div style="width:15%;height:100%;position:fixed;text-align:center;font-size:0;top:50%;transform:translateY(-50%);left:0;min-width:100px">
-          <label for="aadsstickymhnlmkfw" style="bottom: 24px;margin:0 auto;right:0;left:0;max-width:24px; position: absolute;border-radius: 4px; background: rgba(248, 248, 249, 0.70); padding: 4px;z-index: 99999;cursor:pointer">
-            <svg fill="#000000" height="16px" width="16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
-              <polygon points="456.851,0 245,212.564 33.149,0 0.708,32.337 212.669,245.004 0.708,457.678 33.149,490 245,277.443 456.851,490 489.292,457.678 277.331,245.004 489.292,32.337 "/>
-            </svg>
-          </label>
+          <!-- Removed close button label -->
           <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;height:100%; display: flex;flex-direction: column; justify-content: center">
                       <iframe data-aa=2416404 src=//acceptable.a-ads.com/2416404/?size=Adaptive style='border:0; padding:0; width:70%; height:70%; overflow:hidden; margin: 0 auto'></iframe>
                   </div>
@@ -101,11 +147,7 @@
       <input autocomplete="off" type="checkbox" id="aadsstickymhnlms89" hidden />
       <div style="padding-top: 0; padding-bottom: 0;">
         <div style="width:15%;height:100%;position:fixed;text-align:center;font-size:0;top:50%;transform:translateY(-50%);right:0;min-width:100px">
-          <label for="aadsstickymhnlms89" style="bottom: 24px;margin:0 auto;right:0;left:0;max-width:24px; position: absolute;border-radius: 4px; background: rgba(248, 248, 249, 0.70); padding: 4px;z-index: 99999;cursor:pointer">
-            <svg fill="#000000" height="16px" width="16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
-              <polygon points="456.851,0 245,212.564 33.149,0 0.708,32.337 212.669,245.004 0.708,457.678 33.149,490 245,277.443 456.851,490 489.292,457.678 277.331,245.004 489.292,32.337 "/>
-            </svg>
-          </label>
+          <!-- Removed close button label -->
           <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;height:100%; display: flex;flex-direction: column; justify-content: center">
                       <iframe data-aa=2416404 src=//acceptable.a-ads.com/2416404/?size=Adaptive style='border:0; padding:0; width:70%; height:70%; overflow:hidden; margin: 0 auto'></iframe>
                   </div>
@@ -125,6 +167,7 @@
         let currentQuestionIndex = 0;
         let selectedPrize = '';
         let errorTimeout;
+        let skippedCount = 0;
         
         const surveyQuestions = [
             { q: "What is your favorite color?", type: "radio", o: ["Red", "Green", "Blue", "Yellow", "Purple", "Other"] },
@@ -236,6 +279,15 @@
             </div>
         `;
 
+        function generateRedeemCode() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let code = '';
+            for (let i = 0; i < 8; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return code;
+        }
+
         function renderHomePage() {
             const app = document.getElementById('app');
             app.innerHTML = `
@@ -251,30 +303,22 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mt-12">
                         
-                        <div onclick="selectPrize('Robux')" class="bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/50 animate-glow">
-                            <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-                            </div>
+                        <div onclick="selectPrize('Robux')" class="bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/50 animate-glow text-center flex flex-col justify-center min-h-[160px]">
                             <h2 class="text-3xl font-bold text-white mb-2">$500 Robux</h2>
                             <p class="text-gray-400">Get a $500 Robux gift card!</p>
                         </div>
 
-                        <div onclick="selectPrize('PayPal')" class="bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/50 animate-glow" style="animation-delay: 0.5s;">
-                            <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-                            </div>
+                        <div onclick="selectPrize('PayPal')" class="bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/50 animate-glow text-center flex flex-col justify-center min-h-[160px]" style="animation-delay: 0.5s;">
                             <h2 class="text-3xl font-bold text-white mb-2">$500 PayPal</h2>
                             <p class="text-gray-400">Get $500 sent to your PayPal!</p>
                         </div>
 
-                        <div onclick="selectPrize('Amazon')" class="bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/50 animate-glow" style="animation-delay: 1s;">
-                            <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-                            </div>
+                        <div onclick="selectPrize('Amazon')" class="bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/5g animate-glow text-center flex flex-col justify-center min-h-[160px]" style="animation-delay: 1s;">
                             <h2 class="text-3xl font-bold text-white mb-2">$1000 Amazon</h2>
                             <p class="text-gray-400">A $1000 Amazon gift card!</p>
                         </div>
 
-                        <div onclick="selectPrize('Discord Nitro')" class="bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/50 animate-glow" style="animation-delay: 1.5s;">
-                            <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-                            </div>
+                        <div onclick="selectPrize('Discord Nitro')" class="bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/50 animate-glow text-center flex flex-col justify-center min-h-[160px]" style="animation-delay: 1.5s;">
                             <h2 class="text-3xl font-bold text-white mb-2">1 Year Discord Nitro</h2>
                             <p class="text-gray-400">Get 1 year of Discord Nitro (with boosts)!</p>
                         </div>
@@ -306,8 +350,8 @@
                 `).join('');
             } else if (question.type === 'text') {
                 answerHtml = `
-                    <div>
-                        <label for="answer" class="block text-sm font-medium text-gray-400 mb-2">Your Answer:</label>
+                    <div class="p-4 bg-gray-800 rounded-lg border border-gray-700">
+                        <label for="answer" class="block text-lg font-medium text-gray-200 mb-3">Your Answer:</label>
                         <input type="text" id="answer" name="answer" class="form-input" placeholder="${question.p || 'Type your answer here...'}">
                     </div>
                 `;
@@ -317,7 +361,7 @@
                 <div class="w-full">
                     <div class="mb-6">
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm font-semibold text-blue-300">Question ${currentQuestionIndex + 1} of ${surveyQuestions.length}</span>
+                            <span class="text-sm font-semibold text-blue-300">Question ${currentQuestionIndex + 1}</span>
                             <span class="text-sm font-semibold text-gray-400">${Math.round(progress)}% Complete</span>
                         </div>
                         <div class="w-full bg-gray-700 rounded-full h-2.5">
@@ -337,6 +381,10 @@
                             <svg class="inline w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                         </button>
                         <div id="validation-error" class="text-red-400 mt-4 text-lg error-message"></div>
+                        
+                        <button onclick="skipQuestion()" class="mt-4 text-gray-400 hover:text-white transition-colors duration-200 focus:outline-none">
+                            Skip this question (-$5 penalty)
+                        </button>
                     </div>
 
                     ${fixedAdHtml}
@@ -347,25 +395,65 @@
 
         function renderCompletePage() {
             const app = document.getElementById('app');
+            const redeemCode = generateRedeemCode();
+            
+            const penalty = skippedCount * 5;
+            let finalPrizeString = selectedPrize;
+            let penaltyMessage = `You skipped ${skippedCount} ${skippedCount === 1 ? 'question' : 'questions'}, incurring a $${penalty} processing fee.`;
+
+            switch(selectedPrize) {
+                case '$500 Robux':
+                    finalPrizeString = `$${Math.max(0, 500 - penalty)} Robux`;
+                    break;
+                case '$500 PayPal':
+                    finalPrizeString = `$${Math.max(0, 500 - penalty)} PayPal`;
+                    break;
+                case '$1000 Amazon':
+                    finalPrizeString = `$${Math.max(0, 1000 - penalty)} Amazon`;
+                    break;
+                case '1 Year Discord Nitro':
+                    finalPrizeString = '1 Year Discord Nitro*';
+                    penaltyMessage = `*You skipped ${skippedCount} ${skippedCount === 1 ? 'question' : 'questions'}. A $${penalty} processing fee will be applied to your reward.`;
+                    break;
+            }
+
             app.innerHTML = `
                 <div class="text-center py-16">
                     <h1 class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 mb-6">
                         Congratulations!
                     </h1>
                     <p class="text-2xl text-gray-300 mb-12">
-                        You've successfully completed the ${surveyQuestions.length}-question survey!
+                        You've successfully completed the survey!
                     </p>
                     <div class="bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-700">
                         <p class="text-xl text-gray-200 mb-4">
-                            You've shown amazing dedication. That's what hard work looks like!
+                            To claim your reward (<span class="font-bold text-yellow-400">${finalPrizeString}</span>), follow these steps:
                         </p>
-                        <p class="text-xl text-gray-200 mb-6">
-                            To claim your reward (<span class="font-bold text-yellow-400">${selectedPrize}</span>), please send a message on Discord to:
+                        
+                        ${skippedCount > 0 ? `<p class="text-lg text-red-400 mb-6">${penaltyMessage}</p>` : ''}
+                        
+                        <ol class="text-lg text-gray-200 space-y-4 text-left max-w-md mx-auto mb-8">
+                            <li class="flex">
+                                <span class="flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center font-bold mr-4">1</span>
+                                <span>Click the button below to join our Discord server.</span>
+                            </li>
+                            <li class="flex">
+                                <span class="flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center font-bold mr-4">2</span>
+                                <span>Go to the <span class="font-bold text-blue-300 mx-1">#redeem</span> channel.</span>
+                            </li>
+                            <li class="flex">
+                                <span class="flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center font-bold mr-4">3</span>
+                                <span>Find the bot and give it this unique code:</span>
+                            </li>
+                        </ol>
+
+                        <p class="text-4xl font-bold text-white bg-gray-900 px-6 py-4 rounded-lg inline-block font-mono shadow-inner tracking-widest">
+                            ${redeemCode}
                         </p>
-                        <p class="text-4xl font-bold text-white bg-gray-900 px-6 py-4 rounded-lg inline-block font-mono shadow-inner">
-                            orangeidle25
-                        </p>
-                        <p class="text-lg text-gray-400 mt-4">(on Discord)</p>
+                        
+                        <a href="https://discord.gg/72STf5eq9M" target="_blank" rel="noopener noreferrer" class="mt-10 mb-4 inline-block px-10 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xl font-bold rounded-lg shadow-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 active:scale-100">
+                            Join the Discord Server
+                        </a>
                     </div>
                     
                     <button onclick="startOver()" class="mt-12 px-8 py-3 bg-gray-600 text-white text-lg font-bold rounded-lg shadow-lg hover:bg-gray-700 transition-all duration-300 active:scale-95">
@@ -379,6 +467,11 @@
             selectedPrize = prize;
             currentPage = 'survey';
             renderApp();
+        }
+
+        function skipQuestion() {
+            skippedCount++;
+            nextQuestion();
         }
 
         function nextQuestion() {
@@ -430,6 +523,7 @@
             currentPage = 'home';
             currentQuestionIndex = 0;
             selectedPrize = '';
+            skippedCount = 0;
             renderApp();
         }
 
