@@ -8,7 +8,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-62KYN72VR5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-62KYN72VR5');
+    </script>
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -163,11 +172,8 @@
     </div>
 
     <script>
-        let currentPage = 'home';
-        let currentQuestionIndex = 0;
-        let selectedPrize = '';
+        let currentPage, currentQuestionIndex, selectedPrize, skippedCount;
         let errorTimeout;
-        let skippedCount = 0;
         
         const surveyQuestions = [
             { q: "What is your favorite color?", type: "radio", o: ["Red", "Green", "Blue", "Yellow", "Purple", "Other"] },
@@ -464,24 +470,27 @@
         }
 
         function selectPrize(prize) {
-            selectedPrize = prize;
-            currentPage = 'survey';
-            renderApp();
+            window.location.href = `?page=survey&q=0&prize=${encodeURIComponent(prize)}&skipped=0`;
         }
 
         function skipQuestion() {
-            skippedCount++;
-            nextQuestion();
+            const newSkippedCount = skippedCount + 1;
+            const newQuestionIndex = currentQuestionIndex + 1;
+
+            if (newQuestionIndex < surveyQuestions.length) {
+                window.location.href = `?page=survey&q=${newQuestionIndex}&prize=${encodeURIComponent(selectedPrize)}&skipped=${newSkippedCount}`;
+            } else {
+                window.location.href = `?page=complete&prize=${encodeURIComponent(selectedPrize)}&skipped=${newSkippedCount}`;
+            }
         }
 
         function nextQuestion() {
-            if (currentQuestionIndex < surveyQuestions.length - 1) {
-                currentQuestionIndex++;
-                currentPage = 'survey';
+            const newQuestionIndex = currentQuestionIndex + 1;
+            if (newQuestionIndex < surveyQuestions.length) {
+                window.location.href = `?page=survey&q=${newQuestionIndex}&prize=${encodeURIComponent(selectedPrize)}&skipped=${skippedCount}`;
             } else {
-                currentPage = 'complete';
+                window.location.href = `?page=complete&prize=${encodeURIComponent(selectedPrize)}&skipped=${skippedCount}`;
             }
-            renderApp();
         }
 
         function validateAndNextQuestion() {
@@ -520,11 +529,7 @@
         }
 
         function startOver() {
-            currentPage = 'home';
-            currentQuestionIndex = 0;
-            selectedPrize = '';
-            skippedCount = 0;
-            renderApp();
+            window.location.href = window.location.pathname;
         }
 
         function renderApp() {
@@ -539,7 +544,16 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', renderApp);
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            
+            currentPage = params.get('page') || 'home';
+            currentQuestionIndex = parseInt(params.get('q') || '0', 10);
+            selectedPrize = params.get('prize') || '';
+            skippedCount = parseInt(params.get('skipped') || '0', 10);
+            
+            renderApp();
+        });
     </script>
 </body>
 </html>
