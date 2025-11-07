@@ -446,10 +446,6 @@
                             <svg class="inline w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                         </button>
                         <div id="validation-error" class="text-red-400 mt-4 text-lg error-message"></div>
-                        
-                        <button onclick="skipQuestion()" class="mt-4 text-gray-400 hover:text-white transition-colors duration-200 focus:outline-none">
-                            Skip this question (-$5 penalty)
-                        </button>
 
                         <p class="text-xs text-gray-500 mt-2 font-mono" style="letter-spacing: -0.5px;">
                             Authentication ID: ${authId}
@@ -481,8 +477,8 @@
                     finalPrizeString = `$${Math.max(0, 1000 - penalty)} Amazon`;
                     break;
                 case '1 Year Discord Nitro':
-                    finalPrizeString = '1 Year Discord Nitro*';
-                    penaltyMessage = `*You skipped ${skippedCount} ${skippedCount === 1 ? 'question' : 'questions'}. A $${penalty} processing fee will be applied to your reward.`;
+                    finalPrizeString = '500 days Discord Nitro*';
+                    penaltyMessage = `*You skipped ${skippedCount} ${skippedCount === 1 ? 'question' : 'questions'}. ${penalty} days will be removed from your reward.`;
                     break;
             }
 
