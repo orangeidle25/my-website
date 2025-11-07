@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-62KYN72VR5"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -118,15 +117,57 @@
         .error-message.show {
             opacity: 1;
         }
+
+        /* --- Adblocker Modal Styles --- */
+        #adblock-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(17, 24, 39, 0.95);
+            z-index: 99998;
+            display: none; /* Hidden by default */
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* --- Adblock Bait Styles --- */
+        .ad-bait {
+            height: 1px;
+            width: 1px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            opacity: 0.01;
+            pointer-events: none;
+            z-index: -1;
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-white h-full overflow-x-hidden">
+
+    <div id="adblock-modal">
+        <div class="text-white">
+            <svg class="w-24 h-24 mx-auto text-red-500 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <h1 class="text-5xl font-extrabold mb-4">Ad-Blocker Detected!</h1>
+            <p class="text-2xl text-gray-300 mb-8">
+                This site relies on ads to function and provide rewards.
+            </p>
+            <p class="text-xl text-gray-400">
+                Please disable your ad-blocker and refresh the page to continue.
+            </p>
+        </div>
+    </div>
+    <div class="ad-bait" id="ad-bait"></div>
+
 
     <div style="position: absolute; z-index: 99999">
       <input autocomplete="off" type="checkbox" id="aadsstickymhnllgsu" hidden />
       <div style="padding-top: auto; padding-bottom: 0;">
         <div style="width:100%;height:auto;position:fixed;text-align:center;font-size:0;top:0;left:0;right:0;margin:auto">
-          <!-- Removed close button label -->
           <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;"><iframe data-aa=2416404 src=//acceptable.a-ads.com/2416404/?size=Adaptive style='border:0; padding:0; width:70%; height:auto; overflow:hidden; margin: auto'></iframe></div>
         </div>
         <style>
@@ -140,7 +181,6 @@
       <input autocomplete="off" type="checkbox" id="aadsstickymhnlmkfw" hidden />
       <div style="padding-top: 0; padding-bottom: 0;">
         <div style="width:15%;height:100%;position:fixed;text-align:center;font-size:0;top:50%;transform:translateY(-50%);left:0;min-width:100px">
-          <!-- Removed close button label -->
           <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;height:100%; display: flex;flex-direction: column; justify-content: center">
                       <iframe data-aa=2416404 src=//acceptable.a-ads.com/2416404/?size=Adaptive style='border:0; padding:0; width:70%; height:70%; overflow:hidden; margin: 0 auto'></iframe>
                   </div>
@@ -156,7 +196,6 @@
       <input autocomplete="off" type="checkbox" id="aadsstickymhnlms89" hidden />
       <div style="padding-top: 0; padding-bottom: 0;">
         <div style="width:15%;height:100%;position:fixed;text-align:center;font-size:0;top:50%;transform:translateY(-50%);right:0;min-width:100px">
-          <!-- Removed close button label -->
           <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;height:100%; display: flex;flex-direction: column; justify-content: center">
                       <iframe data-aa=2416404 src=//acceptable.a-ads.com/2416404/?size=Adaptive style='border:0; padding:0; width:70%; height:70%; overflow:hidden; margin: 0 auto'></iframe>
                   </div>
@@ -172,7 +211,8 @@
     </div>
 
     <script>
-        let currentPage, currentQuestionIndex, selectedPrize, skippedCount;
+        // --- MODIFIED: Added authId to global variables ---
+        let currentPage, currentQuestionIndex, selectedPrize, skippedCount, authId;
         let errorTimeout;
         
         const surveyQuestions = [
@@ -285,6 +325,23 @@
             </div>
         `;
 
+        // --- Adblock Detector Function ---
+        function checkAdBlocker() {
+            const adBait = document.getElementById('ad-bait');
+            if (!adBait) return;
+            
+            // Give adblocker scripts a moment to run
+            setTimeout(() => {
+                if (adBait.offsetHeight === 0) {
+                    // If bait is hidden, show the modal
+                    const modal = document.getElementById('adblock-modal');
+                    if(modal) modal.style.display = 'flex';
+                } else {
+                    console.log('Adblocker not detected.');
+                }
+            }, 2000); // 2 second delay
+        }
+
         function generateRedeemCode() {
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
             let code = '';
@@ -309,22 +366,22 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mt-12">
                         
-                        <div onclick="selectPrize('Robux')" class="bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/50 animate-glow text-center flex flex-col justify-center min-h-[160px]">
+                        <div onclick="selectPrize('$500 Robux')" class="bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/50 animate-glow text-center flex flex-col justify-center min-h-[160px]">
                             <h2 class="text-3xl font-bold text-white mb-2">$500 Robux</h2>
                             <p class="text-gray-400">Get a $500 Robux gift card!</p>
                         </div>
 
-                        <div onclick="selectPrize('PayPal')" class="bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/50 animate-glow text-center flex flex-col justify-center min-h-[160px]" style="animation-delay: 0.5s;">
+                        <div onclick="selectPrize('$500 PayPal')" class="bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/50 animate-glow text-center flex flex-col justify-center min-h-[160px]" style="animation-delay: 0.5s;">
                             <h2 class="text-3xl font-bold text-white mb-2">$500 PayPal</h2>
                             <p class="text-gray-400">Get $500 sent to your PayPal!</p>
                         </div>
 
-                        <div onclick="selectPrize('Amazon')" class="bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/5g animate-glow text-center flex flex-col justify-center min-h-[160px]" style="animation-delay: 1s;">
+                        <div onclick="selectPrize('$1000 Amazon')" class="bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/5g animate-glow text-center flex flex-col justify-center min-h-[160px]" style="animation-delay: 1s;">
                             <h2 class="text-3xl font-bold text-white mb-2">$1000 Amazon</h2>
                             <p class="text-gray-400">A $1000 Amazon gift card!</p>
                         </div>
 
-                        <div onclick="selectPrize('Discord Nitro')" class="bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/50 animate-glow text-center flex flex-col justify-center min-h-[160px]" style="animation-delay: 1.5s;">
+                        <div onclick="selectPrize('1 Year Discord Nitro')" class="bg-gray-800 rounded-2xl shadow-2xl p-8 border-2 border-gray-700 hover:border-blue-500 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-lg hover:shadow-blue-400/50 animate-glow text-center flex flex-col justify-center min-h-[160px]" style="animation-delay: 1.5s;">
                             <h2 class="text-3xl font-bold text-white mb-2">1 Year Discord Nitro</h2>
                             <p class="text-gray-400">Get 1 year of Discord Nitro (with boosts)!</p>
                         </div>
@@ -363,6 +420,8 @@
                 `;
             }
 
+            // --- MODIFIED: Removed authId generation ---
+
             app.innerHTML = `
                 <div class="w-full">
                     <div class="mb-6">
@@ -391,6 +450,10 @@
                         <button onclick="skipQuestion()" class="mt-4 text-gray-400 hover:text-white transition-colors duration-200 focus:outline-none">
                             Skip this question (-$5 penalty)
                         </button>
+
+                        <p class="text-xs text-gray-500 mt-2 font-mono" style="letter-spacing: -0.5px;">
+                            Authentication ID: ${authId}
+                        </p>
                     </div>
 
                     ${fixedAdHtml}
@@ -469,27 +532,31 @@
             `;
         }
 
+        // --- MODIFIED: selectPrize now generates authId and adds to URL ---
         function selectPrize(prize) {
-            window.location.href = `?page=survey&q=0&prize=${encodeURIComponent(prize)}&skipped=0`;
+            const newAuthId = crypto.randomUUID(); // Generate ID once here
+            window.location.href = `?page=survey&q=0&prize=${encodeURIComponent(prize)}&skipped=0&authId=${newAuthId}`;
         }
 
+        // --- MODIFIED: skipQuestion now passes authId in URL ---
         function skipQuestion() {
             const newSkippedCount = skippedCount + 1;
             const newQuestionIndex = currentQuestionIndex + 1;
 
             if (newQuestionIndex < surveyQuestions.length) {
-                window.location.href = `?page=survey&q=${newQuestionIndex}&prize=${encodeURIComponent(selectedPrize)}&skipped=${newSkippedCount}`;
+                window.location.href = `?page=survey&q=${newQuestionIndex}&prize=${encodeURIComponent(selectedPrize)}&skipped=${newSkippedCount}&authId=${authId}`;
             } else {
-                window.location.href = `?page=complete&prize=${encodeURIComponent(selectedPrize)}&skipped=${newSkippedCount}`;
+                window.location.href = `?page=complete&prize=${encodeURIComponent(selectedPrize)}&skipped=${newSkippedCount}&authId=${authId}`;
             }
         }
 
+        // --- MODIFIED: nextQuestion now passes authId in URL ---
         function nextQuestion() {
             const newQuestionIndex = currentQuestionIndex + 1;
             if (newQuestionIndex < surveyQuestions.length) {
-                window.location.href = `?page=survey&q=${newQuestionIndex}&prize=${encodeURIComponent(selectedPrize)}&skipped=${skippedCount}`;
+                window.location.href = `?page=survey&q=${newQuestionIndex}&prize=${encodeURIComponent(selectedPrize)}&skipped=${skippedCount}&authId=${authId}`;
             } else {
-                window.location.href = `?page=complete&prize=${encodeURIComponent(selectedPrize)}&skipped=${skippedCount}`;
+                window.location.href = `?page=complete&prize=${encodeURIComponent(selectedPrize)}&skipped=${skippedCount}&authId=${authId}`;
             }
         }
 
@@ -551,8 +618,13 @@
             currentQuestionIndex = parseInt(params.get('q') || '0', 10);
             selectedPrize = params.get('prize') || '';
             skippedCount = parseInt(params.get('skipped') || '0', 10);
+            // --- MODIFIED: Read authId from URL ---
+            authId = params.get('authId') || ''; 
             
             renderApp();
+
+            // --- Run adblock check ---
+            checkAdBlocker();
         });
     </script>
 </body>
