@@ -134,7 +134,6 @@
             padding: 2rem;
         }
 
-        /* --- Adblock Bait Styles --- */
         .ad-bait {
             height: 1px;
             width: 1px;
@@ -144,6 +143,7 @@
             opacity: 0.01;
             pointer-events: none;
             z-index: -1;
+            
         }
     </style>
 </head>
@@ -321,7 +321,7 @@
         const fixedAdHtml = `
             <div id="frame" class="my-8" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
                 <iframe data-aa='2416404' src='//acceptable.a-ads.com/2416404/?size=Adaptive'
-                        style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+                        style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto background_color=transparent''></iframe>
             </div>
         `;
 
