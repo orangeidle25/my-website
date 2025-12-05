@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS RESET & BASE --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: white;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            background-color: #111; 
+        }
+
+        /* --- WALLPAPER (Single Layer) --- */
+        .bg-layer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        /* Dark Overlay */
+        .overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.3); 
+            z-index: 2; pointer-events: none;
+        }
+
+        /* --- LAYOUT & UI --- */
+        .container {
+            position: relative; z-index: 3; height: 100%;
+            display: flex; flex-direction: column; justify-content: space-between;
+            padding: 30px;
+        }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; }
+
+        /* --- FAVORITES BAR --- */
+        .favorites {
+            display: flex; gap: 25px; align-items: center;
+            background: rgba(0,0,0,0.2);
+            padding: 12px 24px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .fav-link {
+            color: #888; /* Base gray color */
+            text-decoration: none;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .fav-link i, .fav-svg {
+            font-size: 1.5rem; 
+            height: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        /* Hover effect */
+        .fav-link:hover i, .fav-link:hover .fav-svg {
+            color: white;
+            fill: white;
+            transform: scale(1.1);
+        }
+
+        /* --- WEATHER --- */
+        .weather-container {
+            text-align: right; font-weight: 500; font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* --- CENTER TEXT --- */
+        .center-content {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); text-align: center; width: 100%;
+        }
+        .time {
+            font-size: 10rem; font-weight: 600; letter-spacing: -5px; line-height: 1;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3); margin-bottom: 10px; cursor: default;
+        }
+        .greeting {
+            font-size: 3rem; font-weight: 500; opacity: 0.9;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .time { font-size: 6rem; }
+            .greeting { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bg-layer" class="bg-layer"></div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <div class="top-bar">
+            <div class="favorites">
+                <a href="https://youtube.com" class="fav-link" title="YouTube">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+                <a href="https://github.com" class="fav-link" title="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://vercel.com" class="fav-link" title="Vercel">
+                    <svg class="fav-svg" viewBox="0 0 75 65" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M37.59.25l36.95 64H.64l36.95-64z"></path>
+                    </svg>
+                </a>
+                <a href="https://gemini.google.com" class="fav-link" title="Gemini">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </a>
+            </div>
+
+            <div class="weather-container" id="weather-box">
+                <i class="fa-solid fa-spinner fa-spin" style="opacity: 0.5; font-size: 0.9rem;"></i>
+            </div>
+        </div>
+
+        <div class="center-content">
+            <div class="time" id="time">00:00</div>
+            <div class="greeting" id="greeting">Hello, Jacob.</div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. WALLPAPER LOGIC (Random on Load) ---
+        const UNSPLASH_IDS = [
+            "1472214103451-9374bd1c798e", "1470071459604-3b5ec3a7fe05", "1506744038136-46273834b3fb",
+            "1469474968028-56623f02e42e", "1447752875204-b265cf96c5ef", "1475924156734-496f6cac6ec1",
+            "1433069016821-2f575b542386", "1465146344425-f00d5f5c8f07", "1441974231531-c6227db76b6e",
+            "1501785888041-af3ef285b470", "1497436072909-60f360e1d4b0", "1518020382325-1797102824da",
+            "1484595985005-76c2e3ba152d", "1491466424936-e304919aada7", "1500530855697-b586d89ba3ee",
+            "1504193907409-323ec2480077", "1505118380757-91f5f5631fc0", "1501908734255-3653b934094a",
+            "1464822759023-fed622ff2c3b", "1431794062232-5a3926966580", "1510784713992-500b8033c74b",
+            "1497250681960-ef04dc8850db", "1508849789358-755e16538d30", "1510414842594-586c570f425f"
+        ];
+
+        function setRandomWallpaper() {
+            const randomIndex = Math.floor(Math.random() * UNSPLASH_IDS.length);
+            const id = UNSPLASH_IDS[randomIndex];
+            // 'w=2000' ensures high res, 'q=80' ensures good load speed
+            const url = `https://images.unsplash.com/photo-${id}?q=80&w=2000&auto=format&fit=crop`;
+            
+            document.getElementById('bg-layer').style.backgroundImage = `url('${url}')`;
+        }
+        
+        // Run immediately
+        setRandomWallpaper();
+
+
+        // --- 2. TIME & GREETING ---
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours();
+            let minutes = now.getMinutes();
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('time').innerText = `${hours}:${minutes}`;
+            
+            let greeting = "Good evening";
+            if (hours < 12 && hours >= 4) greeting = "Good morning";
+            else if (hours < 18 && hours >= 12) greeting = "Good afternoon";
+            document.getElementById('greeting').innerText = `${greeting}, Jacob.`;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+
+        // --- 3. WEATHER (Open-Meteo) ---
+        function getWeatherCodeIcon(code) {
+             if ([0].includes(code)) return 'fa-sun'; 
+             if ([1, 2, 3].includes(code)) return 'fa-cloud-sun'; 
+             if ([45, 48].includes(code)) return 'fa-smog'; 
+             if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return 'fa-cloud-rain'; 
+             if ([71, 73, 75, 77, 85, 86].includes(code)) return 'fa-snowflake'; 
+             if ([95, 96, 99].includes(code)) return 'fa-bolt'; 
+             return 'fa-cloud';
+        }
+
+        function fetchWeather() {
+            const box = document.getElementById('weather-box');
+            if (!navigator.geolocation) {
+                box.innerHTML = '<span style="font-size:0.8rem; opacity: 0.6;">Location Off</span>'; return;
+            }
+            navigator.geolocation.getCurrentPosition(position => {
+                const lat = position.coords.latitude; const lon = position.coords.longitude;
+                fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&temperature_unit=celsius`)
+                .then(res => res.json())
+                .then(data => {
+                    const temp = Math.round(data.current.temperature_2m);
+                    const icon = getWeatherCodeIcon(data.current.weather_code);
+                    box.innerHTML = `<span><i class="fa-solid ${icon}"></i> ${temp}°</span>`;
+                })
+                .catch(() => { box.innerHTML = '<span style="font-size:0.8rem; opacity: 0.6;">Weather Error</span>'; });
+            }, () => { box.innerHTML = '<span style="font-size:0.8rem; opacity: 0.6;">Loc Denied</span>'; });
+        }
+        fetchWeather();
+        setInterval(fetchWeather, 900000); // 15 mins
+
+    </script>
+</body>
+</html>
